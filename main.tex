@@ -1,0 +1,64 @@
+\documentclass[11pt,a4paper]{mntrpt}
+
+\usepackage{xltxtra}
+\usepackage{fancyvrb}
+\usepackage{minted}
+\usepackage{ifthen}
+
+\mntrptChangePageStyle{\thepage}
+\newcommand\mnem{\tt\bfseries}
+
+\DefineVerbatimEnvironment{Code}{BVerbatim}{baseline=t}
+\setminted[gas]{fontsize=\footnotesize,baselinestretch=1.0}
+
+\newsavebox{\tblbox}
+\newenvironment{tblframe}[3]
+  {\begin{lrbox}{\tblbox}\begin{minipage}[#1]{#2}{#3}}
+  {\end{minipage}\end{lrbox}\usebox{\tblbox}}
+
+\newcommand{\характеристика}[4]{
+  \noindent\vspace{5pt}\begin{minipage}[b]{#1}{#2}\end{minipage}
+  \ifthenelse{\equal{#4}{}}{}{
+    \hspace{2pt} ---
+    \begin{minipage}[b]{#3}{#4}\end{minipage}}
+
+}
+
+\addbibresource{main.bib}
+
+\begin{document}
+
+\tolerance=5000
+
+%%
+%% Разделы пояснительной записки в соответствии с ГОСТ 2.106-2019
+%% Содержание разделов пояснительной записки дано в ГОСТ 2.119-2013
+%%
+
+\organization{ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \\
+  <<МОТИВ НЕЙРОМОРФНЫЕ ТЕХНОЛОГИИ>>}{OOO <<Мотив НТ>>}
+\approved{Генеральный директор}{}
+\title{\textbf{Техническое задание} \\
+  на разработку нейроморфной испульсной СБИС <<MNTABP3>> и комплекта
+  разработчика программного обеспечения}
+\docnum{}
+%% \signpersa{Руководитель разработки ПАК, \\ Технический директор}{В.~М.~Канглер}
+%% \signpersb{Руководитель проекта, \\
+%%   Руководитель направления по работе с фондами и инвестиционными
+%%   структурами}{В.~В.~Гужавина}
+%% \signpersc{Исполнитель, \\ Руководитель отдела СБИС-разработки}{А.~В.~Зверев}
+\doclocation{Новосибирск}
+\maketitle
+\setcounter{page}{2}
+
+\section{Общие положения}
+\input{общие_положения}
+
+\section{Требования к техническим характеристикам}
+\input{технические_требования}
+
+\cleardoublepage
+\phantomsection\addcontentsline{toc}{section}{Список использованных источников}
+\printbibliography%
+
+\end{document}
